@@ -112,7 +112,7 @@ const VideoGallerySection = memo(() => {
 
             {/* Video Grid */}
             <div className="max-w-7xl mx-auto px-4 relative z-10">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
+                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
                     {videos.map((video, index) => (
                         <motion.div
                             key={index}

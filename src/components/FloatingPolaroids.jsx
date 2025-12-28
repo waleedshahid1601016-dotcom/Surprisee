@@ -153,7 +153,7 @@ const FloatingPolaroids = memo(() => {
                 zIndex: 5,
                 willChange: 'transform'
             }}
-            className="hidden lg:block"
+            className="hidden md:block"
         >
             <motion.div
                 animate={{

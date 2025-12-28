@@ -124,12 +124,15 @@ const VideoMessageSection = memo(() => {
         };
 
         const handleLoadedData = () => {
-            // Attempt autoplay
-            videoElement.play().catch((error) => {
-                console.log('Autoplay prevented:', error);
-                setIsPlaying(false);
-                setShowControls(true);
-            });
+            // Smooth autoplay with slight delay for better UX
+            const playPromise = videoElement.play();
+            if (playPromise !== undefined) {
+                playPromise.catch((error) => {
+                    console.log('Autoplay prevented:', error);
+                    setIsPlaying(false);
+                    setShowControls(true);
+                });
+            }
         };
 
         // Add event listeners
@@ -137,20 +140,11 @@ const VideoMessageSection = memo(() => {
         videoElement.addEventListener('play', handlePlay);
         videoElement.addEventListener('pause', handlePause);
 
-        // Attempt immediate play
-        const playTimer = setTimeout(() => {
-            videoElement.play().catch(() => {
-                setIsPlaying(false);
-                setShowControls(true);
-            });
-        }, 100);
-
         // Cleanup
         return () => {
             videoElement.removeEventListener('loadeddata', handleLoadedData);
             videoElement.removeEventListener('play', handlePlay);
             videoElement.removeEventListener('pause', handlePause);
-            clearTimeout(playTimer);
         };
     }, [currentVideo]);
 
