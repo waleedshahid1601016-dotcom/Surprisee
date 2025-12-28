@@ -36,28 +36,28 @@ const GallerySection = memo(() => {
 
     // Memoize images array for performance
     const images = useMemo(() => [
-        { src: lali, caption: 'My Beautiful Laraib 💕' },
-        { src: lali1, caption: 'The Love of My Life 💖' },
-        { src: lali2, caption: 'My Heart Belongs to You 💗' },
-        { src: lali3, caption: 'Forever My Favorite 💝' },
-        { src: lali4, caption: 'My Precious Angel 👼' },
-        { src: lali5, caption: 'Dream Come True ✨' },
-        { src: lali6, caption: 'My Everything 💫' },
-        { src: lali7, caption: 'Pure Beauty 🌸' },
-        { src: lali8, caption: 'My Sunshine ☀️' },
-        { src: lali9, caption: 'Absolutely Stunning 🌹' },
-        { src: lali10, caption: 'My Queen 👑' },
-        { src: lali11, caption: 'My Treasure 💎' },
-        { src: lali12, caption: 'Forever Mine 💗' },
-        { src: lali13, caption: 'My Happiness 😊' },
-        { src: lali14, caption: 'Beautiful Soul 🌟' },
-        { src: lali15, caption: 'My World 🌍' },
-        { src: lali16, caption: 'Precious Moments 💝' },
-        { src: lali17, caption: 'My Star ⭐' },
-        { src: lali18, caption: 'Sweet Love 🍬' },
-        { src: lali19, caption: 'My Princess 👸' },
-        { src: lali20, caption: 'Eternal Beauty 🌺' },
-        { src: lali30, caption: 'My Forever 💕' },
+        { src: lali, caption: 'Your smile lights up my world 💕' },
+        { src: lali1, caption: 'The most beautiful soul I know 💖' },
+        { src: lali2, caption: 'Your eyes hold galaxies 🌟' },
+        { src: lali3, caption: 'Graceful beyond words 💝' },
+        { src: lali4, caption: 'Your beauty takes my breath away 👼' },
+        { src: lali5, caption: 'Perfect in every way ✨' },
+        { src: lali6, caption: 'My stunning queen 💫' },
+        { src: lali7, caption: 'Pure elegance and beauty 🌸' },
+        { src: lali8, caption: 'Your radiance outshines the sun ☀️' },
+        { src: lali9, caption: 'Absolutely breathtaking 🌹' },
+        { src: lali10, caption: 'Beauty that captivates hearts 👑' },
+        { src: lali11, caption: 'My precious gem 💎' },
+        { src: lali12, caption: 'Forever beautiful, forever mine 💗' },
+        { src: lali13, caption: 'Your smile is my happiness 😊' },
+        { src: lali14, caption: 'A beautiful soul in a beautiful form 🌟' },
+        { src: lali15, caption: 'You make the world brighter 🌍' },
+        { src: lali16, caption: 'Every moment with you is precious 💝' },
+        { src: lali17, caption: 'My shining star ⭐' },
+        { src: lali18, caption: 'Sweeter than any dream 🍬' },
+        { src: lali19, caption: 'My beautiful princess 👸' },
+        { src: lali20, caption: 'Eternal beauty, eternal love 🌺' },
+        { src: lali30, caption: 'My forever love 💕' },
     ], []);
 
     const handleImageLoad = useCallback((index) => {
@@ -140,35 +140,37 @@ const GallerySection = memo(() => {
                             className="relative group cursor-pointer"
                             style={{ willChange: 'transform' }}
                         >
-                            {/* Image container */}
+                            {/* Image container with polaroid style on mobile */}
                             <div
-                                className="relative overflow-hidden rounded-2xl aspect-[3/4]"
+                                className="relative overflow-hidden rounded-lg md:rounded-2xl aspect-square"
                                 style={{
                                     boxShadow: '0 15px 40px rgba(157,23,77,0.25), 0 0 30px rgba(236,72,153,0.15)',
-                                    border: '4px solid rgba(255,255,255,0.8)'
+                                    background: 'white',
+                                    padding: '12px 12px 45px 12px', // Polaroid-style padding
                                 }}
                             >
+                                {/* Loading placeholder */}
+                                {!loadedImages[index] && (
+                                    <div className="absolute inset-0 bg-gradient-to-br from-pink-200 to-rose-200 animate-pulse" />
+                                )}
+
                                 <motion.img
                                     src={image.src}
                                     alt={image.caption}
                                     onLoad={() => handleImageLoad(index)}
                                     loading="lazy"
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                    className="w-full h-full object-cover rounded"
                                 />
 
-                                {/* Gradient overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-pink-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                {/* Gradient overlay on hover - hidden on mobile */}
+                                <div className="hidden md:block absolute inset-0 bg-gradient-to-t from-pink-900/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                                {/* Caption */}
-                                <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileHover={{ opacity: 1, y: 0 }}
-                                    className="absolute bottom-0 left-0 right-0 p-4 text-center transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"
-                                >
-                                    <p className="font-cursive text-white text-lg drop-shadow-lg font-bold">
+                                {/* Caption - always visible on mobile, hover on desktop */}
+                                <div className="absolute bottom-2 left-2 right-2 md:bottom-4 md:left-4 md:right-4 text-center opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
+                                    <p className="font-cursive text-pink-900 md:text-white text-sm md:text-lg font-bold drop-shadow-lg">
                                         {image.caption}
                                     </p>
-                                </motion.div>
+                                </div>
 
                                 {/* Heart popup on load */}
                                 {loadedImages[index] && (

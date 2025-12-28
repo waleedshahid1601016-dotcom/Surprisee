@@ -1,4 +1,4 @@
-import { memo, useState, useEffect, useCallback } from 'react';
+import { memo, useState, useEffect, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // Import all images
@@ -13,13 +13,25 @@ import lali7 from '../assets/lali7.jpeg';
 import lali8 from '../assets/lali8.jpeg';
 import lali9 from '../assets/lali9.jpeg';
 import lali10 from '../assets/lali10.jpeg';
+import lali11 from '../assets/lali11.jpg';
+import lali12 from '../assets/lali12.jpg';
+import lali13 from '../assets/lali13.jpg';
+import lali14 from '../assets/lali14.jpg';
+import lali15 from '../assets/lali15.jpg';
+import lali16 from '../assets/lali16.jpg';
+import lali17 from '../assets/lali17.jpg';
+import lali18 from '../assets/lali18.jpg';
+import lali19 from '../assets/lali19.jpg';
+import lali20 from '../assets/lali20.jpg';
+import lali30 from '../assets/lali30.jpg';
 
 /**
  * ImageSlider - Beautiful auto-playing image slider with smooth transitions
- * Updated with all 11 images of Laraib with elegant animations
+ * Updated with all 22 photos of Laraib with elegant animations
  */
 const ImageSlider = memo(() => {
-    const images = [
+    // Memoize images array for performance
+    const images = useMemo(() => [
         { src: lali, caption: 'My Beautiful Laraib 💕' },
         { src: lali1, caption: 'The Love of My Life 💖' },
         { src: lali2, caption: 'My Heart Belongs to You 💗' },
@@ -31,7 +43,18 @@ const ImageSlider = memo(() => {
         { src: lali8, caption: 'My Sunshine ☀️' },
         { src: lali9, caption: 'Absolutely Stunning 🌹' },
         { src: lali10, caption: 'My Queen 👑' },
-    ];
+        { src: lali11, caption: 'My Treasure 💎' },
+        { src: lali12, caption: 'Forever Mine 💗' },
+        { src: lali13, caption: 'My Happiness 😊' },
+        { src: lali14, caption: 'Beautiful Soul 🌟' },
+        { src: lali15, caption: 'My World 🌍' },
+        { src: lali16, caption: 'Precious Moments 💝' },
+        { src: lali17, caption: 'My Star ⭐' },
+        { src: lali18, caption: 'Sweet Love 🍬' },
+        { src: lali19, caption: 'My Princess 👸' },
+        { src: lali20, caption: 'Eternal Beauty 🌺' },
+        { src: lali30, caption: 'My Forever 💕' },
+    ], []);
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isPaused, setIsPaused] = useState(false);

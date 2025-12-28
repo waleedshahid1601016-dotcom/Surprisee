@@ -34,34 +34,33 @@ import lalivid25 from '../assets/videos/lalivid25.mp4';
  */
 const VideoGallerySection = memo(() => {
     const [selectedVideo, setSelectedVideo] = useState(null);
-    const [playingVideos, setPlayingVideos] = useState({});
 
     // Memoize videos array for performance
     const videos = useMemo(() => [
-        { src: lalivid1, title: 'Sweet Memory 💕' },
-        { src: lalivid2, title: 'Beautiful Moment 💖' },
-        { src: lalivid3, title: 'Our Story 💗' },
-        { src: lalivid4, title: 'Together Forever 💝' },
-        { src: lalivid5, title: 'Love & Laughter 😊' },
-        { src: lalivid6, title: 'Precious Time ⏰' },
-        { src: lalivid7, title: 'Cherished Memories 🌟' },
-        { src: lalivid8, title: 'Happy Days ☀️' },
-        { src: lalivid9, title: 'Special Moments 💫' },
-        { src: lalivid10, title: 'Our Journey 🛤️' },
-        { src: lalivid11, title: 'Pure Joy 😄' },
-        { src: lalivid12, title: 'Heartfelt 💓' },
-        { src: lalivid13, title: 'Sweet Escape 🌸' },
-        { src: lalivid14, title: 'My Sunshine 🌞' },
-        { src: lalivid15, title: 'Beautiful You 🌺' },
-        { src: lalivid16, title: 'Lovely Times 🌹' },
-        { src: lalivid17, title: 'Together Always 👫' },
-        { src: lalivid18, title: 'My Everything 🌈' },
-        { src: lalivid19, title: 'Dream Come True ✨' },
-        { src: lalivid20, title: 'Forever Love 💍' },
-        { src: lalivid22, title: 'Blessed Moments 🙏' },
-        { src: lalivid23, title: 'Perfect Day 🎉' },
-        { src: lalivid24, title: 'My Angel 👼' },
-        { src: lalivid25, title: 'Eternal Love 💞' },
+        { src: lalivid1, title: 'Your laughter is music to my soul 💕' },
+        { src: lalivid2, title: 'The most beautiful moment 💖' },
+        { src: lalivid3, title: 'Your beauty mesmerizes me 💗' },
+        { src: lalivid4, title: 'Together, we shine brighter 💝' },
+        { src: lalivid5, title: 'Your joy fills my heart 😊' },
+        { src: lalivid6, title: 'Every second with you is precious ⏰' },
+        { src: lalivid7, title: 'Cherishing your beautiful presence 🌟' },
+        { src: lalivid8, title: 'Your smile brightens my days ☀️' },
+        { src: lalivid9, title: 'Special moments with my angel 💫' },
+        { src: lalivid10, title: 'Our beautiful journey together 🛤️' },
+        { src: lalivid11, title: 'Pure happiness in your eyes 😄' },
+        { src: lalivid12, title: 'My heart beats for you 💓' },
+        { src: lalivid13, title: 'Your grace takes my breath away 🌸' },
+        { src: lalivid14, title: 'You outshine the sun 🌞' },
+        { src: lalivid15, title: 'The most beautiful person 🌺' },
+        { src: lalivid16, title: 'Lovely times with my love 🌹' },
+        { src: lalivid17, title: 'Together always, beautiful forever 👫' },
+        { src: lalivid18, title: 'You are my everything 🌈' },
+        { src: lalivid19, title: 'Dreams come true in your eyes ✨' },
+        { src: lalivid20, title: 'Forever loving your beauty 💍' },
+        { src: lalivid22, title: 'Blessed to have such beauty 🙏' },
+        { src: lalivid23, title: 'Perfect moments with you 🎉' },
+        { src: lalivid24, title: 'My beautiful angel 👼' },
+        { src: lalivid25, title: 'Eternal beauty, eternal us 💞' },
     ], []);
 
     const handleVideoClick = useCallback((video) => {
@@ -70,10 +69,6 @@ const VideoGallerySection = memo(() => {
 
     const handleCloseModal = useCallback(() => {
         setSelectedVideo(null);
-    }, []);
-
-    const handleVideoHover = useCallback((index, isHovering) => {
-        setPlayingVideos(prev => ({ ...prev, [index]: isHovering }));
     }, []);
 
     return (
@@ -126,56 +121,44 @@ const VideoGallerySection = memo(() => {
                             }}
                             whileHover={{ scale: 1.03, zIndex: 10 }}
                             onClick={() => handleVideoClick(video)}
-                            onMouseEnter={() => handleVideoHover(index, true)}
-                            onMouseLeave={() => handleVideoHover(index, false)}
                             className="relative group cursor-pointer"
                             style={{ willChange: 'transform' }}
                         >
-                            {/* Video container */}
+                            {/* Video container with polaroid style on mobile */}
                             <div
-                                className="relative overflow-hidden rounded-2xl aspect-[3/4]"
+                                className="relative overflow-hidden rounded-lg md:rounded-2xl aspect-square"
                                 style={{
                                     boxShadow: '0 15px 40px rgba(157,23,77,0.25), 0 0 30px rgba(236,72,153,0.15)',
-                                    border: '4px solid rgba(255,255,255,0.8)'
+                                    background: 'white',
+                                    padding: '12px 12px 45px 12px', // Polaroid-style padding
                                 }}
                             >
                                 <video
                                     src={video.src}
-                                    className="w-full h-full object-cover"
+                                    className="w-full h-full object-cover rounded"
                                     muted
                                     loop
+                                    autoPlay
                                     playsInline
                                     preload="metadata"
-                                    ref={(el) => {
-                                        if (el && playingVideos[index]) {
-                                            el.play().catch(() => { });
-                                        } else if (el && !playingVideos[index]) {
-                                            el.pause();
-                                            el.currentTime = 0;
-                                        }
-                                    }}
                                 />
 
-                                {/* Gradient overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-pink-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                {/* Gradient overlay on hover - hidden on mobile */}
+                                <div className="hidden md:block absolute inset-0 bg-gradient-to-t from-pink-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                                {/* Play icon */}
-                                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                {/* Play icon - hidden on mobile */}
+                                <div className="hidden md:flex absolute inset-0 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                     <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center">
                                         <span className="text-3xl text-pink-600">▶️</span>
                                     </div>
                                 </div>
 
-                                {/* Title */}
-                                <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileHover={{ opacity: 1, y: 0 }}
-                                    className="absolute bottom-0 left-0 right-0 p-4 text-center transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"
-                                >
-                                    <p className="font-cursive text-white text-lg drop-shadow-lg font-bold">
+                                {/* Title - always visible on mobile, hover on desktop */}
+                                <div className="absolute bottom-2 left-2 right-2 md:bottom-4 md:left-4 md:right-4 text-center opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
+                                    <p className="font-cursive text-pink-900 md:text-white text-sm md:text-lg font-bold drop-shadow-lg">
                                         {video.title}
                                     </p>
-                                </motion.div>
+                                </div>
                             </div>
                         </motion.div>
                     ))}
