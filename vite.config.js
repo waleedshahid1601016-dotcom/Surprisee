@@ -24,32 +24,11 @@ export default defineConfig({
     }
   },
   build: {
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          'vendor-react': ['react', 'react-dom'],
-          'vendor-motion': ['framer-motion'],
-          'sections': [
-            './src/sections/GallerySection.jsx',
-            './src/sections/VideoGallerySection.jsx',
-            './src/sections/VideoMessageSection.jsx'
-          ]
-        }
-      }
-    },
     chunkSizeWarningLimit: 1000,
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-        pure_funcs: ['console.log']
-      }
-    },
     // Asset optimization
-    assetsInlineLimit: 4096, // Inline assets smaller than 4KB
+    assetsInlineLimit: 4096,
     cssCodeSplit: true,
-    sourcemap: false // Disable sourcemaps for production
+    sourcemap: false
   },
   base: process.env.VITE_BASE_PATH || "/Surprisee",
 })
