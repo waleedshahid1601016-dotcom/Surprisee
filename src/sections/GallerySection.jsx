@@ -1,4 +1,4 @@
-import { memo, useState, useCallback } from 'react';
+import { memo, useState, useCallback, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { AnimatedSection } from '../components';
 
@@ -14,16 +14,28 @@ import lali7 from '../assets/lali7.jpeg';
 import lali8 from '../assets/lali8.jpeg';
 import lali9 from '../assets/lali9.jpeg';
 import lali10 from '../assets/lali10.jpeg';
+import lali11 from '../assets/lali11.jpg';
+import lali12 from '../assets/lali12.jpg';
+import lali13 from '../assets/lali13.jpg';
+import lali14 from '../assets/lali14.jpg';
+import lali15 from '../assets/lali15.jpg';
+import lali16 from '../assets/lali16.jpg';
+import lali17 from '../assets/lali17.jpg';
+import lali18 from '../assets/lali18.jpg';
+import lali19 from '../assets/lali19.jpg';
+import lali20 from '../assets/lali20.jpg';
+import lali30 from '../assets/lali30.jpg';
 
 /**
  * GallerySection - Romantic image gallery with zoom, parallax, and hover effects
- * Updated with all 11 photos
+ * Optimized with all 21 photos and performance enhancements
  */
 const GallerySection = memo(() => {
     const [loadedImages, setLoadedImages] = useState({});
     const [selectedImage, setSelectedImage] = useState(null);
 
-    const images = [
+    // Memoize images array for performance
+    const images = useMemo(() => [
         { src: lali, caption: 'My Beautiful Laraib 💕' },
         { src: lali1, caption: 'The Love of My Life 💖' },
         { src: lali2, caption: 'My Heart Belongs to You 💗' },
@@ -35,7 +47,18 @@ const GallerySection = memo(() => {
         { src: lali8, caption: 'My Sunshine ☀️' },
         { src: lali9, caption: 'Absolutely Stunning 🌹' },
         { src: lali10, caption: 'My Queen 👑' },
-    ];
+        { src: lali11, caption: 'My Treasure 💎' },
+        { src: lali12, caption: 'Forever Mine 💗' },
+        { src: lali13, caption: 'My Happiness 😊' },
+        { src: lali14, caption: 'Beautiful Soul 🌟' },
+        { src: lali15, caption: 'My World 🌍' },
+        { src: lali16, caption: 'Precious Moments 💝' },
+        { src: lali17, caption: 'My Star ⭐' },
+        { src: lali18, caption: 'Sweet Love 🍬' },
+        { src: lali19, caption: 'My Princess 👸' },
+        { src: lali20, caption: 'Eternal Beauty 🌺' },
+        { src: lali30, caption: 'My Forever 💕' },
+    ], []);
 
     const handleImageLoad = useCallback((index) => {
         setLoadedImages(prev => ({ ...prev, [index]: true }));
@@ -71,6 +94,7 @@ const GallerySection = memo(() => {
                 animate={{ opacity: [0.15, 0.3, 0.15], scale: [1, 1.2, 1] }}
                 transition={{ duration: 8, repeat: Infinity }}
                 className="absolute top-1/4 -left-32 w-96 h-96 bg-gradient-to-br from-pink-300 to-rose-400 rounded-full blur-3xl"
+                style={{ willChange: 'transform, opacity' }}
             />
 
             {/* Section Header */}
@@ -96,7 +120,7 @@ const GallerySection = memo(() => {
 
             {/* Image Grid */}
             <div className="max-w-7xl mx-auto px-4 relative z-10">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
+                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
                     {images.map((image, index) => (
                         <motion.div
                             key={index}
@@ -104,8 +128,8 @@ const GallerySection = memo(() => {
                             whileInView={{ opacity: 1, y: 0, scale: 1 }}
                             viewport={{ once: true, margin: '-50px' }}
                             transition={{
-                                duration: 0.6,
-                                delay: index * 0.08,
+                                duration: 0.5,
+                                delay: index * 0.04,
                                 ease: [0.25, 0.1, 0.25, 1]
                             }}
                             whileHover={{
@@ -114,6 +138,7 @@ const GallerySection = memo(() => {
                             }}
                             onClick={() => handleSelectImage(image)}
                             className="relative group cursor-pointer"
+                            style={{ willChange: 'transform' }}
                         >
                             {/* Image container */}
                             <div
@@ -127,6 +152,7 @@ const GallerySection = memo(() => {
                                     src={image.src}
                                     alt={image.caption}
                                     onLoad={() => handleImageLoad(index)}
+                                    loading="lazy"
                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                 />
 

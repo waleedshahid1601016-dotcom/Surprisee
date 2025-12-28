@@ -320,9 +320,59 @@ a:focus-visible {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* ================================================
+   PERFORMANCE OPTIMIZATIONS FOR SMOOTH ANIMATIONS
+   ================================================ */
+
+/* Hardware Acceleration - Force GPU rendering */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+/* Enable hardware acceleration for animations */
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    perspective: 1000;
+    -webkit-perspective: 1000;
+  }
+}
+
+/* Smooth scrolling with momentum */
+html {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* Optimize rendering for transforms */
+body {
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+
+/* Better animation timing */
+* {
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 /* Improved Performance */
 .will-change-transform {
   will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+.will-change-all {
+  will-change: transform, opacity;
 }
 
 /* Print Styles */

@@ -1,4 +1,4 @@
-import { memo, useState, useRef, useCallback, useEffect } from 'react';
+import { memo, useState, useRef, useCallback, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AnimatedSection } from '../components';
 
@@ -8,10 +8,30 @@ import lalivid2 from '../assets/videos/lalivid2.mp4';
 import lalivid3 from '../assets/videos/lalivid3.mp4';
 import lalivid4 from '../assets/videos/lalivid4.mp4';
 import lalivid5 from '../assets/videos/lalivid5.mp4';
+import lalivid6 from '../assets/videos/lalivid6.mp4';
+import lalivid7 from '../assets/videos/lalivid7.mp4';
+import lalivid8 from '../assets/videos/lalivid8.mp4';
+import lalivid9 from '../assets/videos/lalivid9.mp4';
+import lalivid10 from '../assets/videos/lalivid10.mp4';
+import lalivid11 from '../assets/videos/lalivid11.mp4';
+import lalivid12 from '../assets/videos/lalivid12.mp4';
+import lalivid13 from '../assets/videos/lalivid13.mp4';
+import lalivid14 from '../assets/videos/lalivid14.mp4';
+import lalivid15 from '../assets/videos/lalivid15.mp4';
+import lalivid16 from '../assets/videos/lalivid16.mp4';
+import lalivid17 from '../assets/videos/lalivid17.mp4';
+import lalivid18 from '../assets/videos/lalivid18.mp4';
+import lalivid19 from '../assets/videos/lalivid19.mp4';
+import lalivid20 from '../assets/videos/lalivid20.mp4';
+import lalivid22 from '../assets/videos/lalivid22.mp4';
+import lalivid23 from '../assets/videos/lalivid23.mp4';
+import lalivid24 from '../assets/videos/lalivid24.mp4';
+import lalivid25 from '../assets/videos/lalivid25.mp4';
 
 /**
  * VideoMessageSection - Personal video messages with custom player
- * Features multiple videos, custom controls, fullscreen support
+ * Features all 24 videos, custom controls, fullscreen support
+ * Optimized for smooth performance
  */
 const VideoMessageSection = memo(() => {
     const [currentVideo, setCurrentVideo] = useState(0);
@@ -19,13 +39,33 @@ const VideoMessageSection = memo(() => {
     const [showControls, setShowControls] = useState(true);
     const videoRef = useRef(null);
 
-    const videos = [
-        { src: lalivid1, title: 'A Special Message 💕', description: 'Just for you, my love' },
-        { src: lalivid2, title: 'My Heart Speaks 💖', description: 'Words from my soul' },
-        { src: lalivid3, title: 'For My Beautiful Wife 💗', description: 'You mean everything to me' },
-        { src: lalivid4, title: 'Our Love Story 💝', description: 'Memories we cherish' },
-        { src: lalivid5, title: 'Forever Yours 💍', description: 'My promise to you' },
-    ];
+    // Memoize videos array for performance - All 24 videos
+    const videos = useMemo(() => [
+        { src: lalivid1, title: 'Message 1 💕', description: 'For you, my love' },
+        { src: lalivid2, title: 'Message 2 💖', description: 'From my heart' },
+        { src: lalivid3, title: 'Message 3 💗', description: 'You mean everything' },
+        { src: lalivid4, title: 'Message 4 💝', description: 'Our love story' },
+        { src: lalivid5, title: 'Message 5 💍', description: 'Forever yours' },
+        { src: lalivid6, title: 'Message 6 💞', description: 'My everything' },
+        { src: lalivid7, title: 'Message 7 💓', description: 'Always together' },
+        { src: lalivid8, title: 'Message 8 💘', description: 'Endless love' },
+        { src: lalivid9, title: 'Message 9 💖', description: 'You and me' },
+        { src: lalivid10, title: 'Message 10 💕', description: 'Beautiful moments' },
+        { src: lalivid11, title: 'Message 11 💗', description: 'Sweet memories' },
+        { src: lalivid12, title: 'Message 12 💝', description: 'Special times' },
+        { src: lalivid13, title: 'Message 13 💞', description: 'Our journey' },
+        { src: lalivid14, title: 'Message 14 💓', description: 'Forever love' },
+        { src: lalivid15, title: 'Message 15 💘', description: 'My heart speaks' },
+        { src: lalivid16, title: 'Message 16 💖', description: 'True love' },
+        { src: lalivid17, title: 'Message 17 💕', description: 'My soulmate' },
+        { src: lalivid18, title: 'Message 18 💗', description: 'Precious you' },
+        { src: lalivid19, title: 'Message 19 💝', description: 'My treasure' },
+        { src: lalivid20, title: 'Message 20 💞', description: 'Beautiful soul' },
+        { src: lalivid22, title: 'Message 21 💓', description: 'My angel' },
+        { src: lalivid23, title: 'Message 22 💘', description: 'Dream girl' },
+        { src: lalivid24, title: 'Message 23 💖', description: 'My world' },
+        { src: lalivid25, title: 'Message 24 💕', description: 'Eternal love' },
+    ], []);
 
     const handlePlayPause = useCallback(() => {
         if (!videoRef.current) return;
@@ -66,39 +106,50 @@ const VideoMessageSection = memo(() => {
         }
     }, [currentVideo, videos.length]);
 
-    // Auto-play videos when they change
+    // Auto-play videos when they change and sync playing state
     useEffect(() => {
         if (!videoRef.current) return;
 
         const videoElement = videoRef.current;
 
-        // Handler for when video data is loaded
+        // Handlers for video events
+        const handlePlay = () => {
+            setIsPlaying(true);
+            setShowControls(false);
+        };
+
+        const handlePause = () => {
+            setIsPlaying(false);
+            setShowControls(true);
+        };
+
         const handleLoadedData = () => {
-            videoElement.play().then(() => {
-                setIsPlaying(true);
-            }).catch((error) => {
+            // Attempt autoplay
+            videoElement.play().catch((error) => {
                 console.log('Autoplay prevented:', error);
-                // User interaction required - just set playing state to false
                 setIsPlaying(false);
+                setShowControls(true);
             });
         };
 
-        // Add event listener
+        // Add event listeners
         videoElement.addEventListener('loadeddata', handleLoadedData);
+        videoElement.addEventListener('play', handlePlay);
+        videoElement.addEventListener('pause', handlePause);
 
-        // Attempt immediate play for good measure
+        // Attempt immediate play
         const playTimer = setTimeout(() => {
-            videoElement.play().then(() => {
-                setIsPlaying(true);
-            }).catch(() => {
-                // Silently fail if autoplay is blocked
+            videoElement.play().catch(() => {
                 setIsPlaying(false);
+                setShowControls(true);
             });
-        }, 300);
+        }, 100);
 
         // Cleanup
         return () => {
             videoElement.removeEventListener('loadeddata', handleLoadedData);
+            videoElement.removeEventListener('play', handlePlay);
+            videoElement.removeEventListener('pause', handlePause);
             clearTimeout(playTimer);
         };
     }, [currentVideo]);
@@ -113,11 +164,13 @@ const VideoMessageSection = memo(() => {
                 animate={{ opacity: [0.2, 0.4, 0.2], scale: [1, 1.2, 1] }}
                 transition={{ duration: 6, repeat: Infinity }}
                 className="absolute top-20 -left-20 w-80 h-80 bg-gradient-to-br from-pink-300 to-rose-400 rounded-full blur-3xl"
+                style={{ willChange: 'transform, opacity' }}
             />
             <motion.div
                 animate={{ opacity: [0.2, 0.4, 0.2], scale: [1.2, 1, 1.2] }}
                 transition={{ duration: 8, repeat: Infinity }}
                 className="absolute bottom-20 -right-20 w-96 h-96 bg-gradient-to-br from-rose-300 to-pink-500 rounded-full blur-3xl"
+                style={{ willChange: 'transform, opacity' }}
             />
 
             {/* Header */}
@@ -155,8 +208,6 @@ const VideoMessageSection = memo(() => {
                         boxShadow: '0 30px 80px rgba(157,23,77,0.4), 0 0 60px rgba(236,72,153,0.2)',
                         border: '4px solid rgba(255,255,255,0.9)'
                     }}
-                    onMouseEnter={() => setShowControls(true)}
-                    onMouseLeave={() => setShowControls(!isPlaying)}
                 >
                     {/* Video Title Bar */}
                     <div
@@ -183,21 +234,26 @@ const VideoMessageSection = memo(() => {
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
                                 className="w-full h-full object-contain bg-black"
+                                style={{ willChange: 'transform, opacity' }}
                                 onEnded={handleVideoEnd}
                                 playsInline
+                                autoPlay
+                                muted
+                                preload="metadata"
                             >
                                 <source src={videos[currentVideo].src} type="video/mp4" />
                                 Your browser does not support the video tag.
                             </motion.video>
                         </AnimatePresence>
 
-                        {/* Play/Pause Overlay */}
+                        {/* Play/Pause Overlay - Only show when NOT playing */}
                         <AnimatePresence>
-                            {showControls && (
+                            {!isPlaying && (
                                 <motion.div
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.2 }}
                                     className="absolute inset-0 flex items-center justify-center bg-black/20"
                                 >
                                     <motion.button

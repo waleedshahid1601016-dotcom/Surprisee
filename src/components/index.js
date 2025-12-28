@@ -1,5 +1,6 @@
 // Core Animation Components
 export { default as FloatingHearts } from './FloatingHearts';
+export { default as FloatingPolaroids } from './FloatingPolaroids';
 export { default as AnimatedSection } from './AnimatedSection';
 export { default as GlowingCard } from './GlowingCard';
 export { default as TypewriterText } from './TypewriterText';

@@ -7,6 +7,7 @@ export { default as FinalMessageSection } from './FinalMessageSection';
 
 // New Sections
 export { default as VideoMessageSection } from './VideoMessageSection';
+export { default as VideoGallerySection } from './VideoGallerySection';
 export { default as TimelineSection } from './TimelineSection';
 export { default as LoveLetterSection } from './LoveLetterSection';
 export { default as ReasonsSection } from './ReasonsSection';

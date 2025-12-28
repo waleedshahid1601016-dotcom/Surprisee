@@ -69,7 +69,7 @@ const FloatingHearts = memo(() => {
                             }
                         }}
                         className="absolute text-3xl md:text-4xl"
-                        style={{ left: `${heart.left}%` }}
+                        style={{ left: `${heart.left}%`, willChange: 'transform, opacity' }}
                     >
                         {heart.emoji}
                     </motion.div>

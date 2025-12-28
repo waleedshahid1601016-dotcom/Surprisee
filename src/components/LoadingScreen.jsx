@@ -95,7 +95,7 @@ const LoadingScreen = memo(({ onLoadComplete }) => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1 }}
-                        className="relative z-10 text-center px-4"
+                        className="relative z-10 text-center px-6 max-w-2xl"
                     >
                         {/* Animated Heart */}
                         <motion.div
@@ -129,7 +129,7 @@ const LoadingScreen = memo(({ onLoadComplete }) => {
                         </motion.p>
 
                         {/* Progress Bar */}
-                        <div className="w-48 sm:w-64 mx-auto">
+                        <div className="w-full max-w-xs sm:max-w-sm mx-auto">
                             <div
                                 className="h-3 rounded-full overflow-hidden"
                                 style={{

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { memo, useCallback, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FloatingHearts, MusicPlayer, LoadingScreen, CountdownTimer } from './components';
+import { FloatingHearts, FloatingPolaroids, MusicPlayer, LoadingScreen, CountdownTimer } from './components';
 import {
   LandingPage,
   HeroSection,
@@ -9,6 +9,7 @@ import {
   GallerySection,
   FinalMessageSection,
   VideoMessageSection,
+  VideoGallerySection,
   TimelineSection,
   LoveLetterSection,
   ReasonsSection,
@@ -71,6 +72,9 @@ const App = memo(() => {
             {/* Floating hearts background - always visible */}
             <FloatingHearts />
 
+            {/* Floating polaroid decorations */}
+            <FloatingPolaroids />
+
             {/* Music Player */}
             <MusicPlayer />
 
@@ -100,10 +104,13 @@ const App = memo(() => {
               {/* 8. Photo Gallery */}
               <GallerySection />
 
-              {/* 9. Future Dreams - Vision together */}
+              {/* 9. Video Gallery - All video memories */}
+              <VideoGallerySection />
+
+              {/* 10. Future Dreams - Vision together */}
               <FutureDreamsSection />
 
-              {/* 10. Final Love Message */}
+              {/* 11. Final Love Message */}
               <FinalMessageSection />
 
               {/* Footer */}
@@ -136,7 +143,7 @@ const App = memo(() => {
                   </div>
 
                   <p className="text-sm text-white/70 mt-8">
-                    December 2025 💍 In Sha Allah
+                    2026 💍 In Sha Allah
                   </p>
                 </motion.div>
               </footer>
