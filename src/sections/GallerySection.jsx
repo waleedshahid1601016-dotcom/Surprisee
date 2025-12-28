@@ -128,8 +128,8 @@ const GallerySection = memo(() => {
                             whileInView={{ opacity: 1, y: 0, scale: 1 }}
                             viewport={{ once: true, margin: '-50px' }}
                             transition={{
-                                duration: 0.5,
-                                delay: index * 0.04,
+                                duration: 0.4,
+                                delay: index * 0.02,
                                 ease: [0.25, 0.1, 0.25, 1]
                             }}
                             whileHover={{

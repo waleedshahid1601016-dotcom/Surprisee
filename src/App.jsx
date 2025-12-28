@@ -1,20 +1,22 @@
 /* eslint-disable no-unused-vars */
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useState, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FloatingHearts, FloatingPolaroids, MusicPlayer, LoadingScreen, CountdownTimer } from './components';
 import {
   LandingPage,
   HeroSection,
   WishesSection,
-  GallerySection,
   FinalMessageSection,
-  VideoMessageSection,
-  VideoGallerySection,
   TimelineSection,
   LoveLetterSection,
   ReasonsSection,
   FutureDreamsSection
 } from './sections';
+
+// Lazy load heavy sections for better performance
+const GallerySection = lazy(() => import('./sections/GallerySection'));
+const VideoGallerySection = lazy(() => import('./sections/VideoGallerySection'));
+const VideoMessageSection = lazy(() => import('./sections/VideoMessageSection'));
 
 /**
  * Main App Component - Comprehensive romantic surprise for Laraib 💕
@@ -88,7 +90,9 @@ const App = memo(() => {
               <CountdownTimer />
 
               {/* 3. Video Messages - Personal videos */}
-              <VideoMessageSection />
+              <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="text-2xl text-white">Loading...</div></div>}>
+                <VideoMessageSection />
+              </Suspense>
 
               {/* 4. Love Letter - Heartfelt message */}
               <LoveLetterSection />
@@ -103,10 +107,14 @@ const App = memo(() => {
               <TimelineSection />
 
               {/* 8. Photo Gallery */}
-              <GallerySection />
+              <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="text-2xl text-white">Loading...</div></div>}>
+                <GallerySection />
+              </Suspense>
 
               {/* 9. Video Gallery - All video memories */}
-              <VideoGallerySection />
+              <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="text-2xl text-white">Loading...</div></div>}>
+                <VideoGallerySection />
+              </Suspense>
 
               {/* 10. Future Dreams - Vision together */}
               <FutureDreamsSection />

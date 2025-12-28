@@ -376,6 +376,32 @@ body {
   will-change: transform, opacity;
 }
 
+/* Advanced GPU Acceleration for Animations */
+.animate-item,
+[class*="motion-"],
+[class*="animate-"] {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Optimize font rendering */
+body,
+button,
+input,
+textarea {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth scrolling performance */
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    scroll-behavior: smooth;
+  }
+}
+
 /* Print Styles */
 @media print {
   body {
